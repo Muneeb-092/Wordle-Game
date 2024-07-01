@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Wordle.MainPage"
+             xmlns:viewmodel="clr-namespace:Wordle.Model"
+             xmlns:model="clr-namespace:Wordle.Model"
+             x:DataType="viewmodel:GameView">
+
+    <Grid RowDefinitions="*, Auto"
+          Padding="8,12,8,12"
+          BackgroundColor="#1c0a28">
+   
+        <!-- Grid boxes -->
+        <VerticalStackLayout
+            Spacing="8"
+            BindableLayout.ItemsSource="{Binding Rows}">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="model:Row">
+                    <HorizontalStackLayout 
+                        Spacing="8"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding Boxes}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="model:Box">
+                                <Frame Style="{DynamicResource GridFrame}"
+                                       BackgroundColor="{Binding Colour, FallbackValue=Black}"
+                                       HeightRequest="70"
+                                       WidthRequest="60">
+                                    <Label Text="{Binding Input}"
+                                           FontFamily="Bold"
+                                           FontSize="24"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+
+        </VerticalStackLayout>
+
+        <!--Keyboard -->
+        <VerticalStackLayout Grid.Row="1" Spacing="4">
+            <!-- ROW 1-->
+            <HorizontalStackLayout 
+                        Spacing="2"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding KeyRow1}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <Button Style="{DynamicResource KeyButton}"
+                                Text="{Binding .}"
+                                BackgroundColor="white" 
+                                TextColor="Black"
+                                CommandParameter="{Binding .}" Clicked="Button_Clicked"
+                                />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+
+            <!-- ROW 2-->
+            <HorizontalStackLayout 
+                        Spacing="2"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding KeyRow2}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <Button Style="{DynamicResource KeyButton}"
+                                Text="{Binding .}"
+                                BackgroundColor="white"
+                                TextColor="Black" CommandParameter="{Binding .}" Clicked="Button_Clicked"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+
+            <!-- ROW 3-->
+            <HorizontalStackLayout 
+                        Spacing="4"
+                        HorizontalOptions="Center"
+                        BindableLayout.ItemsSource="{Binding KeyRow3}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Null}">
+                        <Button Style="{DynamicResource KeyButton}"
+                                Text="{Binding .}"
+                                BackgroundColor="white"
+                                TextColor="Black" CommandParameter="{Binding .}" Clicked="Button_Clicked"/>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
